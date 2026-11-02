@@ -1,7 +1,8 @@
 # AdSense integration
 
-The integration is prepared but disabled. No Google advertising script or ad request
-is made with the default configuration. This does not guarantee AdSense approval.
+The supplied Google AdSense script is installed in the head of every public page.
+Manual ad units remain disabled until configured. Auto ads are controlled separately
+in the AdSense dashboard. Installing the script does not guarantee site approval.
 
 ## Configuration
 
@@ -13,7 +14,8 @@ is made with the default configuration. This does not guarantee AdSense approval
    `ca-pub-` identifier (16 digits) into `ads.publisherId` in `src/site-config.json`.
 4. Build and deploy. The build adds `google-adsense-account` to every public
    page's head and writes your matching seller record at `/ads.txt`. This step
-   does not load an ad script. Check that the seller record matches Google's.
+   includes the supplied async AdSense script when `ads.loadScript` is true.
+   Check that the seller record matches Google's.
 5. In AdSense, verify the connection and click **Request review**.
 6. Choose and configure the consent management option in Google's dashboard.
 7. After approval, create responsive display units and configure their IDs below.
@@ -31,6 +33,9 @@ Edit `src/site-config.json`:
 - After AdSense approval, enter your `ca-pub-` publisher ID and the two display
   ad unit IDs in `slots.content` and `slots.footer`.
 - Set `ads.enabled: true` only when the consent integration is ready.
+- `ads.loadScript` controls the script in the page head independently of manual
+  ad units. It is currently true, as requested with the supplied Google snippet.
+  Use Google's Privacy & messaging dashboard to configure its consent message.
 
 Each tool page places advertisements after its usage guide and after the FAQ,
 away from uploads, editing tools, navigation and downloads. Slots reserve vertical
@@ -46,7 +51,8 @@ repository does not include a CMP or claim that a generic cookie banner suffices
 
 The CMP adapter must set `window.doculensAdsAllowed = true` and dispatch
 `window.dispatchEvent(new Event('doculens:ads-consent'))` only after its regional
-rules permit Google ad requests. Until then, no ad script is loaded. For withdrawal,
+rules permit manual ad requests. The head script is loaded independently when
+`ads.loadScript` is true; configure the actual Google CMP for it. For withdrawal,
 set the flag to false, dispatch the event, and follow your CMP's instructions for
 reloading the page and handling already-loaded vendors. Hiding a slot alone does
 not unload Google's script or revoke stored consent. Provide the CMP's privacy

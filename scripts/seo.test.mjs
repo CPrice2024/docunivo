@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 
 const pages=JSON.parse(await readFile(new URL('../src/seo-pages.json',import.meta.url),'utf8'));
+const config=JSON.parse(await readFile(new URL('../src/site-config.json',import.meta.url),'utf8'));
 const domain='https://docunivo.online';
 const decode=value=>value.replaceAll('&amp;','&').replaceAll('&#39;',"'").replaceAll('&quot;','"');
 test('all public pages have unique metadata, readable HTML and consistent structured data',async()=>{
@@ -34,5 +35,20 @@ test('sitemap, robots and brand assets are included in the production build',asy
  for(const name of ['favicon.svg','favicon-48.png','apple-touch-icon.png','icon-192.png','icon-512.png','social-preview.png','site.webmanifest']){
   const asset=await readFile(new URL(`../dist/${name}`,import.meta.url));assert.ok(asset.length>0);
   if(name.endsWith('.png'))assert.deepEqual([...asset.subarray(0,8)],[137,80,78,71,13,10,26,10]);
+ }
+});
+
+test('AdSense loader appears once per page in the head with the configured publisher',async()=>{
+ for(const page of pages){
+  const html=await readFile(new URL(`../dist${page.path}index.html`,import.meta.url),'utf8');
+  const scripts=html.match(/<script[^>]+src="https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js[^>]*><\/script>/g)||[];
+  assert.equal(scripts.length,config.ads.loadScript&&config.ads.publisherId?1:0);
+  if(scripts.length){
+   assert.ok(html.split('</head>')[0].includes(scripts[0]));
+   assert.ok(scripts[0].includes(`client=${config.ads.publisherId}`));
+   assert.ok(scripts[0].includes('crossorigin="anonymous"'));
+   assert.ok(scripts[0].includes(' async '));
+   assert.ok(scripts[0].includes('id="doculens-adsense"'));
+  }
  }
 });

@@ -18,6 +18,7 @@ for(const page of pages){
  if(page.path!=='/')graph.push({'@type':'BreadcrumbList','@id':`${url}#breadcrumbs`,itemListElement:[{'@type':'ListItem',position:1,name:'Docunivo',item:`${domain}/`},{'@type':'ListItem',position:2,name:page.heading,item:url}]});
  const metadata=[`<link rel="canonical" href="${escape(url)}"/>`,'<meta name="robots" content="index,follow,max-image-preview:large"/>','<meta property="og:type" content="website"/>','<meta property="og:site_name" content="Docunivo"/>'];
  if(verification.meta)metadata.push(verification.meta);
+ if(config.ads.loadScript&&verification.meta)metadata.push(`<script id="doculens-adsense" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${config.ads.publisherId}" crossorigin="anonymous"></script>`);
  for(const [key,value] of Object.entries({title:page.title,description:page.description,url,image:`${domain}/social-preview.png`}))metadata.push(`<meta property="og:${key}" content="${escape(value)}"/>`);
  metadata.push('<meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/>','<meta property="og:image:alt" content="Docunivo - browser document and image tools"/>','<meta name="twitter:card" content="summary_large_image"/>');
  for(const [key,value] of Object.entries({title:page.title,description:page.description,image:`${domain}/social-preview.png`,'image:alt':'Docunivo - browser document and image tools'}))metadata.push(`<meta name="twitter:${key}" content="${escape(value)}"/>`);

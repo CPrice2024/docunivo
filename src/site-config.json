@@ -3,6 +3,7 @@
   "contactEmail": "",
   "ads": {
     "enabled": false,
+    "loadScript": true,
     "preview": false,
     "publisherId": "ca-pub-9090113425900719",
     "slots": {"content": "", "footer": ""}
