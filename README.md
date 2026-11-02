@@ -41,6 +41,8 @@ Deploy the generated `dist/` directory to a static host.
 
 For GitHub and Render setup, see [DEPLOYMENT.md](DEPLOYMENT.md).
 The included `render.yaml` configures a Render Static Site for `docunivo.online`.
+For search phrases, metadata, branding assets and Google Search Console setup,
+see [SEO.md](SEO.md). The production build also checks generated SEO output.
 
 ## Current features
 

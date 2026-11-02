@@ -1,7 +1,11 @@
-import {Instagram, Linkedin, ScanText} from 'lucide-react';
+import {Instagram, Linkedin} from 'lucide-react';
+
+function BrandMark(){
+ return <svg width="25" height="25" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M23 14H14v9m27-9h9v9M14 41v9h9m27-9v9h-9M24 24h16M24 32h10M24 40h16"/></svg>;
+}
 
 export function Brand(){
- return <a className="brand" href="/" aria-label="Docunivo home"><span className="brand-icon" aria-hidden="true"><ScanText size={23}/><span className="brand-scan"/></span><span>Docu<span className="brand-accent">nivo</span></span></a>;
+ return <a className="brand" href="/" aria-label="Docunivo home"><span className="brand-icon" aria-hidden="true"><BrandMark/><span className="brand-scan"/></span><span>Docu<span className="brand-accent">nivo</span></span></a>;
 }
 
 function XIcon(){
