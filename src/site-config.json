@@ -4,7 +4,7 @@
   "ads": {
     "enabled": false,
     "preview": false,
-    "publisherId": "",
+    "publisherId": "ca-pub-9090113425900719",
     "slots": {"content": "", "footer": ""}
   }
 }
