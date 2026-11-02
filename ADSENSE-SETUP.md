@@ -5,6 +5,23 @@ is made with the default configuration. This does not guarantee AdSense approval
 
 ## Configuration
 
+### Connect your account and request review
+
+1. Sign in at https://adsense.google.com/ and add `docunivo.online` as a site.
+2. Complete the account details Google requests in the AdSense dashboard.
+3. Select the **Meta tag** site-verification method. Copy your account's
+   `ca-pub-` identifier (16 digits) into `ads.publisherId` in `src/site-config.json`.
+4. Build and deploy. The build adds `google-adsense-account` to every public
+   page's head and writes your matching seller record at `/ads.txt`. This step
+   does not load an ad script. Check that the seller record matches Google's.
+5. In AdSense, verify the connection and click **Request review**.
+6. Choose and configure the consent management option in Google's dashboard.
+7. After approval, create responsive display units and configure their IDs below.
+
+Keep `ads.enabled: false` during verification and review. Keep `ads.preview: false`
+on the public site so visitors do not see empty demonstration placements.
+No publisher ID, slot ID, consent script or approval status should be invented.
+
 Edit `src/site-config.json`:
 
 - Set `domain` to your HTTPS website origin, without a path.
@@ -48,8 +65,8 @@ directory at your domain root, then verify direct links, mobile layouts, consent
 ads.txt and AdSense site verification.
 
 Review Privacy and Terms text against your actual hosting, operator details and
-CMP behavior. Add the public contact address. Obtain commercial rights for the
-Pixel logo font before commercial launch; the supplied font is personal-use only.
+CMP behavior. Add the public contact address. The live brand now uses system
+fonts; the personal-use-only demo font is no longer loaded by the site.
 
 Google references:
 - https://support.google.com/adsense/answer/1346295

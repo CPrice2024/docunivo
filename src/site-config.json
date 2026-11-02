@@ -3,7 +3,7 @@
   "contactEmail": "",
   "ads": {
     "enabled": false,
-    "preview": true,
+    "preview": false,
     "publisherId": "",
     "slots": {"content": "", "footer": ""}
   }
