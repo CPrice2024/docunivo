@@ -1,0 +1,10 @@
+{
+  "domain": "https://docunivo.online",
+  "contactEmail": "",
+  "ads": {
+    "enabled": false,
+    "preview": true,
+    "publisherId": "",
+    "slots": {"content": "", "footer": ""}
+  }
+}
